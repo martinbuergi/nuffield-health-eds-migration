@@ -3,55 +3,75 @@
   padding: 0;
 }
 
-/* Nuffield Health hero: full-width background image with a CONTAINED,
-   left-aligned text box (not stretched full-width text), matching the
-   source site's hero-location-finder treatment. */
+/* Nuffield Health hero: split-panel layout matching the source's
+   hero-location-finder treatment - a solid green content panel on the
+   left with a CONTAINED text box, and the campaign photo filling the
+   right side of the same row (not a full-bleed background photo). */
 .hero {
   position: relative;
   display: flex;
-  align-items: center;
-  padding: 60px 24px;
-  min-height: 420px;
-  background-color: #5f6062;
+  align-items: stretch;
+  min-height: 380px;
+  background-color: var(--nuffield-green);
+  overflow: hidden;
 }
 
 .hero > div {
-  max-width: 1200px;
+  display: flex;
+  align-items: stretch;
   width: 100%;
-  margin: 0 auto;
+}
+
+/* first cell = image, becomes the right-hand photo panel */
+.hero > div > div:first-child {
+  order: 2;
+  position: relative;
+  flex: 1 1 50%;
+  min-width: 0;
+}
+
+/* second cell = text content, becomes the left-hand green panel */
+.hero > div > div:last-child {
+  order: 1;
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 40px 24px;
+  max-width: 560px;
+  box-sizing: border-box;
 }
 
 .hero h1 {
-  max-width: 560px;
-  margin-left: 0;
-  margin-right: auto;
+  margin: 0 0 8px;
   color: white;
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 700;
-}
-
-.hero > div > div {
-  max-width: 560px;
 }
 
 .hero p {
   color: white;
   font-size: var(--body-font-size-m);
+  margin: 8px 0;
 }
 
 /* pill-shaped white CTA button with green text, matching source's
-   "Join now" hero button treatment */
-.hero p.button-container a.button.primary,
-.hero a.button {
+   "Join now" hero button treatment. Buttonization requires authored
+   bold-wrapped links (p > strong > a), per boilerplate decorateButtons(). */
+.hero a.button,
+.hero a.button.primary {
   background-color: white;
   color: var(--nuffield-green);
   border-color: white;
   border-radius: 48px;
-  padding: 18px 32px;
+  padding: 16px 28px;
   font-weight: 600;
+  margin-top: 8px;
 }
 
-.hero p.button-container a.button:hover {
+.hero a.button:hover,
+.hero a.button.primary:hover {
   background-color: var(--light-color);
   color: var(--nuffield-green-dark);
   border-color: var(--light-color);
@@ -65,40 +85,45 @@
 
 .hero picture {
   position: absolute;
-  z-index: -1;
   inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+  display: block;
 }
 
 .hero img {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  display: block;
 }
 
-/* darken the background image slightly so white hero text remains legible,
-   echoing the source's dark overlay/background treatment */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgb(0 0 0 / 45%) 0%, rgb(0 0 0 / 15%) 60%, rgb(0 0 0 / 0%) 100%);
-  z-index: 0;
-}
+@media (width < 900px) {
+  .hero {
+    flex-direction: column;
+    min-height: 0;
+  }
 
-.hero > div {
-  position: relative;
-  z-index: 1;
+  .hero > div {
+    flex-direction: column;
+  }
+
+  .hero > div > div:first-child {
+    order: 1;
+    height: 220px;
+  }
+
+  .hero > div > div:last-child {
+    order: 2;
+    max-width: unset;
+    padding: 32px 24px;
+  }
 }
 
 @media (width >= 900px) {
-  .hero {
-    padding: 80px 32px;
-    min-height: 480px;
+  .hero h1 {
+    font-size: 40px;
   }
 
-  .hero h1 {
-    font-size: 48px;
+  .hero > div > div:last-child {
+    padding: 40px 48px;
   }
 }
