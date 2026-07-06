@@ -3,17 +3,64 @@
   padding: 0;
 }
 
+/* Nuffield Health hero: full-width background image with a CONTAINED,
+   left-aligned text box (not stretched full-width text), matching the
+   source site's hero-location-finder treatment. */
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  display: flex;
+  align-items: center;
+  padding: 60px 24px;
+  min-height: 420px;
+  background-color: #5f6062;
+}
+
+.hero > div {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
+  max-width: 560px;
+  margin-left: 0;
   margin-right: auto;
-  color: var(--background-color);
+  color: white;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.hero > div > div {
+  max-width: 560px;
+}
+
+.hero p {
+  color: white;
+  font-size: var(--body-font-size-m);
+}
+
+/* pill-shaped white CTA button with green text, matching source's
+   "Join now" hero button treatment */
+.hero p.button-container a.button.primary,
+.hero a.button {
+  background-color: white;
+  color: var(--nuffield-green);
+  border-color: white;
+  border-radius: 48px;
+  padding: 18px 32px;
+  font-weight: 600;
+}
+
+.hero p.button-container a.button:hover {
+  background-color: var(--light-color);
+  color: var(--nuffield-green-dark);
+  border-color: var(--light-color);
+}
+
+.hero p a:not(.button) {
+  color: white;
+  font-size: var(--body-font-size-xs);
+  text-decoration: underline;
 }
 
 .hero picture {
@@ -30,8 +77,28 @@
   height: 100%;
 }
 
+/* darken the background image slightly so white hero text remains legible,
+   echoing the source's dark overlay/background treatment */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(0 0 0 / 45%) 0%, rgb(0 0 0 / 15%) 60%, rgb(0 0 0 / 0%) 100%);
+  z-index: 0;
+}
+
+.hero > div {
+  position: relative;
+  z-index: 1;
+}
+
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    padding: 80px 32px;
+    min-height: 480px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
   }
 }
