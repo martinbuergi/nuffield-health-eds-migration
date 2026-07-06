@@ -356,13 +356,13 @@ header nav .nav-tools a:any-link::before {
    divs are auto-classed nav-brand/nav-sections/nav-tools); this 4th div is
    targeted directly to add a static/visual-only search affordance matching
    the source site's prominent search box, per lesson learned on prior jobs. */
-header nav > div:nth-child(4) {
+header nav > div:nth-child(5) {
   display: none;
   background-color: var(--nuffield-green);
 }
 
 @media (width >= 900px) {
-  header nav > div:nth-child(4) {
+  header nav > div:nth-child(5) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -370,7 +370,7 @@ header nav > div:nth-child(4) {
     height: var(--nav-height);
   }
 
-  header nav > div:nth-child(4) p {
+  header nav > div:nth-child(5) p {
     position: relative;
     margin: 0;
     padding: 10px 20px 10px 40px;
@@ -382,7 +382,7 @@ header nav > div:nth-child(4) {
     width: 320px;
   }
 
-  header nav > div:nth-child(4) p::before {
+  header nav > div:nth-child(5) p::before {
     content: '';
     position: absolute;
     left: 16px;
