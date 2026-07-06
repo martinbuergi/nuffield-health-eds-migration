@@ -1,4 +1,6 @@
-/* header and nav layout - Nuffield Health brand green header */
+/* header and nav layout - Nuffield Health TWO-TIER brand header:
+   Row 1 (green): logo (left), search box (center), login (right)
+   Row 2 (light grey): centered primary nav links (Hospitals/Gyms/Services/Advice) */
 header .nav-wrapper {
   background-color: var(--nuffield-green);
   width: 100%;
@@ -37,11 +39,15 @@ header nav[aria-expanded='true'] {
   }
 
   header nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 0 32px;
-    max-width: 1264px;
-    padding: 0 32px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: var(--nav-height) 48px;
+    grid-template-areas:
+      'brand search tools'
+      'sections sections sections';
+    gap: 0;
+    max-width: unset;
+    padding: 0;
   }
 
   header nav[aria-expanded='true'] {
@@ -140,13 +146,23 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   }
 }
 
-/* brand */
+/* brand (row 1, green background) */
 header .nav-brand {
   grid-area: brand;
   flex-basis: 145px;
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
+  background-color: var(--nuffield-green);
+}
+
+@media (width >= 900px) {
+  header .nav-brand {
+    display: flex;
+    align-items: center;
+    padding-left: 32px;
+    height: var(--nav-height);
+  }
 }
 
 header nav .nav-brand a {
@@ -155,10 +171,8 @@ header nav .nav-brand a {
   text-decoration: none;
 }
 
-/* Text-based logo styled to echo the Nuffield Health wordmark since the
-   boilerplate nav-brand only supports text/inline content by default.
-   The real logo SVG asset was downloaded during import and is referenced
-   below as a background-image mask to closely match the source's mark. */
+/* Real Nuffield Health logo asset (downloaded from source during import),
+   referenced as a background-image to closely match the source's mark. */
 header nav .nav-brand p {
   margin: 0;
   height: 40px;
@@ -176,12 +190,13 @@ header nav .nav-brand img {
   height: auto;
 }
 
-/* sections */
+/* sections (ROW 2 - light grey band with centered primary nav links) */
 header nav .nav-sections {
   grid-area: sections;
   flex: 1 1 auto;
   display: none;
   visibility: hidden;
+  background-color: var(--light-color);
 }
 
 header nav[aria-expanded='true'] .nav-sections {
@@ -198,15 +213,15 @@ header nav .nav-sections ul {
 
 header nav .nav-sections ul > li {
   font-weight: 500;
-  color: white;
+  color: var(--nuffield-grey);
 }
 
 header nav .nav-sections a:any-link {
-  color: white;
+  color: var(--nuffield-grey);
 }
 
 header nav .nav-sections a:hover {
-  color: white;
+  color: var(--nuffield-green);
   text-decoration: underline;
 }
 
@@ -220,9 +235,13 @@ header nav .nav-sections ul > li > ul > li {
 
 @media (width >= 900px) {
   header nav .nav-sections {
-    display: block;
+    display: flex;
     visibility: visible;
     white-space: nowrap;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    background-color: var(--light-color);
   }
 
   header nav[aria-expanded='true'] .nav-sections {
@@ -257,7 +276,7 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections ul {
     display: flex;
-    gap: 24px;
+    gap: 32px;
     margin: 0;
   }
 
@@ -299,12 +318,21 @@ header nav .nav-sections ul > li > ul > li {
   }
 }
 
-/* tools (login) */
+/* tools (row 1, login) */
 header nav .nav-tools {
   grid-area: tools;
   display: flex;
   align-items: center;
   gap: 20px;
+  background-color: var(--nuffield-green);
+}
+
+@media (width >= 900px) {
+  header nav .nav-tools {
+    height: var(--nav-height);
+    padding-right: 32px;
+    justify-content: flex-end;
+  }
 }
 
 header nav .nav-tools a:any-link {
@@ -331,40 +359,40 @@ header nav .nav-tools a:any-link::before {
    the source site's prominent search box, per lesson learned on prior jobs. */
 header nav > div:nth-child(4) {
   display: none;
+  background-color: var(--nuffield-green);
 }
 
 @media (width >= 900px) {
   header nav > div:nth-child(4) {
     display: flex;
     align-items: center;
-    order: 3;
-    margin-right: 0;
-  }
-
-  header nav .nav-tools {
-    order: 4;
+    justify-content: center;
+    grid-column: 2;
+    grid-row: 1;
+    height: var(--nav-height);
   }
 
   header nav > div:nth-child(4) p {
     position: relative;
     margin: 0;
-    padding: 8px 16px 8px 36px;
-    background-color: rgb(255 255 255 / 15%);
-    border-radius: 20px;
-    color: white;
+    padding: 10px 20px 10px 40px;
+    background-color: white;
+    border-radius: 24px;
+    color: var(--nuffield-grey);
     font-size: var(--body-font-size-xs);
     white-space: nowrap;
+    width: 320px;
   }
 
   header nav > div:nth-child(4) p::before {
     content: '';
     position: absolute;
-    left: 12px;
+    left: 16px;
     top: 50%;
     transform: translateY(-50%);
     width: 14px;
     height: 14px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235f6062'%3E%3Cpath d='M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z'/%3E%3C/svg%3E");
     background-size: contain;
     background-repeat: no-repeat;
   }
