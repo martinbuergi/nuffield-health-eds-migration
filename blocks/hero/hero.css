@@ -6,12 +6,17 @@
 /* Nuffield Health hero: split-panel layout matching the source's
    hero-location-finder treatment - a solid green content panel on the
    left with a CONTAINED text box, and the campaign photo filling the
-   right side of the same row (not a full-bleed background photo). */
+   right side of the same row (not a full-bleed background photo).
+
+   Height uses clamp() scaled from viewport width instead of a fixed px
+   value, so the hero scales proportionally across all viewport widths
+   (mobile through ultra-wide) rather than collapsing into a thin
+   squashed strip on very wide screens while a fixed height stays put. */
 .hero {
   position: relative;
   display: flex;
   align-items: stretch;
-  min-height: 380px;
+  min-height: clamp(320px, 28vw, 560px);
   background-color: var(--nuffield-green);
   overflow: hidden;
 }
@@ -108,7 +113,12 @@
 
   .hero > div > div:first-child {
     order: 1;
-    height: 220px;
+    /* aspect-ratio keeps the photo panel proportional to the viewport
+       width on mobile instead of using a fixed px height */
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 160px;
+    max-height: 320px;
   }
 
   .hero > div > div:last-child {
