@@ -1,5 +1,7 @@
+/* Nuffield Health footer: dark charcoal band matching source's footer band */
 footer {
-  background-color: var(--light-color);
+  background-color: var(--nuffield-charcoal);
+  color: white;
   font-size: var(--body-font-size-xs);
 }
 
@@ -10,7 +12,19 @@ footer .footer > div {
 }
 
 footer .footer p {
-  margin: 0;
+  margin: 0 0 12px;
+}
+
+footer .footer a:any-link {
+  color: white;
+}
+
+footer .footer a:hover {
+  color: var(--nuffield-green);
+}
+
+footer .footer strong {
+  font-weight: 500;
 }
 
 @media (width >= 900px) {
